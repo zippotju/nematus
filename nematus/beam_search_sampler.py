@@ -219,7 +219,7 @@ def _beam_search(model_adapters, beam_size, batch_size_x, max_translation_len,
                            indices, seq_lens)
     lengths = tf.reduce_min(eos_indices+1, axis=2)
     float_lengths = tf.cast(lengths, dtype=tf.float32)
-    length_penalties = float_lengths ** normalization_alpha
+    length_penalties = ((5 + float_lengths) ** normalization_alpha) / ((5 + 1) ** normalization_alpha)
     finished_scores = finished_scores / length_penalties
 
     return finished_sequences, finished_scores

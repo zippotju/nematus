@@ -179,7 +179,7 @@ def _random_sample(model_adapters, beam_size, batch_size_x,
     eos_indices = tf.where(tf.equal(sequences, eos_id), indices, seq_lens)
     lengths = tf.reduce_min(eos_indices+1, axis=1)
     float_lengths = tf.cast(lengths, dtype=tf.float32)
-    length_penalties = float_lengths ** normalization_alpha
+    length_penalties = ((5 + float_lengths) ** normalization_alpha) / ((5 + 1) ** normalization_alpha)
     scores = scores / length_penalties
 
     # Reshape / transpose to group translations and scores by input sentence.
