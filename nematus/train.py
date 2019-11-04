@@ -399,7 +399,7 @@ def validate_with_script(session, beam_search_sampler):
         nbest=False,
         minibatch_size=config.valid_batch_size)
     out.flush()
-    args = [config.valid_script, out.name]
+    args = [config.valid_script, out.name, config.saveto.split('/')[-2]]
     proc = subprocess.Popen(args, stdin=None, stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE)
     stdout_bytes, stderr_bytes = proc.communicate()
