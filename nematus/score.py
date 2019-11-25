@@ -88,7 +88,7 @@ def calc_scores(source_file, target_file, scorer_settings, configs):
                     target_vocab_size=config.target_vocab_size,
                     use_factor=(config.factors > 1),
                     sort_by_length=False)
-
+                config.lable_smoothing=0
                 ce_vals, _ = train.calc_cross_entropy_per_sentence(
                     sess,
                     model,
