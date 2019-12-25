@@ -103,9 +103,9 @@ def full_sampler(replica, sampler, sess, config, x, x_mask, y, y_mask):
         index = []
         for i in range(len(samples)):
             index.append(len(samples[i]))
-        for i in range(x_mask.shape[1]):
-            x_new = np.repeat(x, index, axis=2)
-            x_mask_new = np.repeat(x_mask, index, axis=1)
+        # for i in range(x_mask.shape[1]):
+        x_new = np.repeat(x, index, axis=2)
+        x_mask_new = np.repeat(x_mask, index, axis=1)
 
         # calculate the the number of remaining candidate samplings for each source sentence,
         # store the information in 'index' for the subsequent normalisation of distribution and calculation of
